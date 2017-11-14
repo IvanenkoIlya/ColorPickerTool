@@ -1,0 +1,16 @@
+C:\Users\IIVanenko\Documents\Visual Studio 2017\Projects\ColorSelector\ColorSelector\bin\Debug\ColorSelector.exe.config
+C:\Users\IIVanenko\Documents\Visual Studio 2017\Projects\ColorSelector\ColorSelector\bin\Debug\ColorSelector.exe
+C:\Users\IIVanenko\Documents\Visual Studio 2017\Projects\ColorSelector\ColorSelector\bin\Debug\ColorSelector.pdb
+C:\Users\IIVanenko\Documents\Visual Studio 2017\Projects\ColorSelector\ColorSelector\obj\Debug\ColorPicker.g.cs
+C:\Users\IIVanenko\Documents\Visual Studio 2017\Projects\ColorSelector\ColorSelector\obj\Debug\ScreenWindow.g.cs
+C:\Users\IIVanenko\Documents\Visual Studio 2017\Projects\ColorSelector\ColorSelector\obj\Debug\App.g.cs
+C:\Users\IIVanenko\Documents\Visual Studio 2017\Projects\ColorSelector\ColorSelector\obj\Debug\ColorSelector_MarkupCompile.cache
+C:\Users\IIVanenko\Documents\Visual Studio 2017\Projects\ColorSelector\ColorSelector\obj\Debug\ColorSelector_MarkupCompile.lref
+C:\Users\IIVanenko\Documents\Visual Studio 2017\Projects\ColorSelector\ColorSelector\obj\Debug\ColorPicker.baml
+C:\Users\IIVanenko\Documents\Visual Studio 2017\Projects\ColorSelector\ColorSelector\obj\Debug\ScreenWindow.baml
+C:\Users\IIVanenko\Documents\Visual Studio 2017\Projects\ColorSelector\ColorSelector\obj\Debug\ColorSelector.g.resources
+C:\Users\IIVanenko\Documents\Visual Studio 2017\Projects\ColorSelector\ColorSelector\obj\Debug\ColorSelector.Properties.Resources.resources
+C:\Users\IIVanenko\Documents\Visual Studio 2017\Projects\ColorSelector\ColorSelector\obj\Debug\ColorSelector.csproj.GenerateResource.Cache
+C:\Users\IIVanenko\Documents\Visual Studio 2017\Projects\ColorSelector\ColorSelector\obj\Debug\ColorSelector.csproj.CoreCompileInputs.cache
+C:\Users\IIVanenko\Documents\Visual Studio 2017\Projects\ColorSelector\ColorSelector\obj\Debug\ColorSelector.exe
+C:\Users\IIVanenko\Documents\Visual Studio 2017\Projects\ColorSelector\ColorSelector\obj\Debug\ColorSelector.pdb

@@ -5,11 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ColorSelector"
         mc:Ignorable="d"
-        Title="ScreenWindow" Height="300" Width="300" AllowsTransparency="True" WindowStyle="None" Background="#55000000"
-        WindowState="Maximized"
-        MouseDown="PickColor">
+        Title="ScreenWindow" Height="300" Width="300" AllowsTransparency="True" WindowStyle="None" Background="#01000000"
+        Name="Window" WindowState="Maximized" MouseDown="PickColor">
 
-    <Canvas Name="canv" MouseMove="Canvas_MouseMove" Background="Transparent">
-        <Ellipse Name="ColorWindow" Fill="White" StrokeThickness="2" Stroke="Black" Height="30" Width="30"/>
+    <Canvas Name="WindowCanvas" MouseMove="Canvas_MouseMove" Background="Transparent">
+        <Ellipse Name="Magnifier" StrokeThickness="2" Stroke="Black" Height="32" Width="32" Margin="0" />
     </Canvas>
 </Window>
+    
+    <!-- 
+        <Ellipse.Fill>
+    <VisualBrush x:Name="MagnifierBrush" Visual="{Binding ElementName=Window}" ViewboxUnits="Absolute" />
+    </Ellipse.Fill>
+    -->

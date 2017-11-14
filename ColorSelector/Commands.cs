@@ -10,7 +10,7 @@ namespace ColorSelector
         {
             var inputGestures = new InputGestureCollection();
             inputGestures.Add(new MultiKeyGesture(new Key[] { Key.C, Key.P }, ModifierKeys.Control, "Ctrl+C,P"));
-            ColorPickerCommand = new RoutedUICommand("Color Picker", "ColorPicker", typeof(Commands), inputGestures);
+            ColorPickerCommand = new RoutedCommand("ColorPicker", typeof(Commands), inputGestures);
         }
     }
 }

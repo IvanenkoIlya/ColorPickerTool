@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ColorSelector"
         mc:Ignorable="d"
-        Title="MainWindow" Height="407.418" Width="214.013">
+        Title="ColorPicker" Height="522.82" Width="317.373"
+        Closing="Window_Closing">
     <Window.CommandBindings>
         <CommandBinding Command="{x:Static local:Commands.ColorPickerCommand}" Executed="PickColor" />
     </Window.CommandBindings>

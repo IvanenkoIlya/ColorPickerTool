@@ -1,24 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Forms;
-using System.Windows.Input;
-using System.Windows.Shapes;
 
 namespace ColorSelector
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ColorPicker.xaml
     /// </summary>
     public partial class ColorPicker : Window
     {
-        public ColorPicker()
+        NotifyIcon ni;
+
+       public ColorPicker()
         {
             InitializeComponent();
 
-            NotifyIcon ni = new NotifyIcon
+            ContextMenu cm = new ContextMenu();
+            cm.MenuItems.Add(new MenuItem("&Open", ReopenApplication));
+            cm.MenuItems.Add(new MenuItem("&Pick color", PickColor));
+            cm.MenuItems.Add("-");
+            cm.MenuItems.Add(new MenuItem("&Exit", CloseApplication));
+
+            ni = new NotifyIcon
             {
                 Icon = new Icon(System.Windows.Application.GetResourceStream(new Uri("/Resources/main_QUO_icon.ico", UriKind.Relative)).Stream),
                 Visible = true
@@ -28,6 +32,7 @@ namespace ColorSelector
                 Show();
                 WindowState = WindowState.Normal;
             };
+            ni.ContextMenu = cm;
         }
 
         protected override void OnStateChanged(EventArgs e)
@@ -44,13 +49,20 @@ namespace ColorSelector
             colorPicker.Show();
         }
 
-        private void MouseMoveHandler(object sender, System.Windows.Input.MouseEventArgs e)
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            //if (Captured)
-            //{
-            //    var absmouseXpos = e.GetPosition(this).X;
-            //    var absmouseYpos = e.GetPosition(this).Y;
-            //}
+            ni.Dispose();
+        }
+
+        private void ReopenApplication(object sends, EventArgs e)
+        {
+            Show();
+            WindowState = WindowState.Normal;                
+        }
+
+        private void CloseApplication(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

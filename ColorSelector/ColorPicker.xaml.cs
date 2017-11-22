@@ -11,8 +11,9 @@ namespace ColorSelector
     public partial class ColorPicker : Window
     {
         NotifyIcon ni;
+        public static Color SelectedColor;
 
-       public ColorPicker()
+        public ColorPicker()
         {
             InitializeComponent();
 
@@ -42,7 +43,7 @@ namespace ColorSelector
 
             base.OnStateChanged(e);
         }
-
+        
         private void PickColor(object sender, EventArgs e)
         {
             ScreenWindow colorPicker = new ScreenWindow();
@@ -57,7 +58,7 @@ namespace ColorSelector
         private void ReopenApplication(object sends, EventArgs e)
         {
             Show();
-            WindowState = WindowState.Normal;                
+            WindowState = WindowState.Normal;
         }
 
         private void CloseApplication(object sender, EventArgs e)

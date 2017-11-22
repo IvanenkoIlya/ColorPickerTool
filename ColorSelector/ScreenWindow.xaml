@@ -9,12 +9,10 @@
         Name="Window" WindowState="Maximized" MouseDown="PickColor">
 
     <Canvas Name="WindowCanvas" MouseMove="Canvas_MouseMove" Background="Transparent">
-        <Ellipse Name="Magnifier" StrokeThickness="2" Stroke="Black" Height="32" Width="32" Margin="0" />
+        <Ellipse Name="Magnifier"
+                 MouseEnter="Magnifier_MouseOver" 
+                 StrokeThickness="2" Stroke="Black" Height="48" Width="48" Margin="0" 
+                 Canvas.Left="10" Canvas.Top="10">
+        </Ellipse>
     </Canvas>
 </Window>
-    
-    <!-- 
-        <Ellipse.Fill>
-    <VisualBrush x:Name="MagnifierBrush" Visual="{Binding ElementName=Window}" ViewboxUnits="Absolute" />
-    </Ellipse.Fill>
-    -->

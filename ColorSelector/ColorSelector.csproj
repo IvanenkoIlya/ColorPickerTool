@@ -80,6 +80,7 @@
     <Compile Include="ScreenWindow.xaml.cs">
       <DependentUpon>ScreenWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Util\ColorExtentions.cs" />
     <Page Include="ColorPicker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -142,6 +143,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\main_QUO_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\img_colormap.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

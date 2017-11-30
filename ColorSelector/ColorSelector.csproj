@@ -80,6 +80,7 @@
     <Compile Include="ScreenWindow.xaml.cs">
       <DependentUpon>ScreenWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Util\Bindings.cs" />
     <Compile Include="Util\ColorExtentions.cs" />
     <Page Include="ColorPicker.xaml">
       <Generator>MSBuild:Compile</Generator>

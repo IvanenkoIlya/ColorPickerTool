@@ -3,8 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using Imaging = System.Drawing.Imaging;
@@ -46,7 +48,11 @@ namespace ColorSelector
         {
             var clickPoint = Windows.Forms.Cursor.Position;
 
-            ColorPicker.SelectedColor = GetPixelColor(clickPoint.X, clickPoint.Y);           
+            BindingExpression bindingExpression = ((ColorPicker)Application.Current.MainWindow).SelectedColorDisplay.GetBindingExpression(Windows.Shapes.Shape.FillProperty);
+            //Binding binding = bindingExpression.ParentBinding;
+
+            PropertyInfo property = bindingExpression.DataItem.GetType().GetProperty(bindingExpression.ParentBinding.Path.Path);
+            property.SetValue(bindingExpression.DataItem, new SolidColorBrush(GetPixelColor(clickPoint.X, clickPoint.Y).ConvertToMediaColor()));
 
             Close();
         }

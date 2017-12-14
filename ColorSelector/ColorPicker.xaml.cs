@@ -1,8 +1,12 @@
-﻿using System;
+﻿using ColorSelector.Util;
+using System;
 using System.ComponentModel;
-using System.Drawing;
+using System.Diagnostics;
+
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Shapes;
 using WinForms = System.Windows.Forms;
 
 namespace ColorSelector
@@ -13,7 +17,19 @@ namespace ColorSelector
     public partial class ColorPicker : Window
     {
         WinForms.NotifyIcon ni;
-        public static Color SelectedColor { get; set; }
+        private Color selectedColor;
+        public Color SelectedColor
+        {
+            get
+            {
+                return selectedColor;
+            }
+            set
+            {
+                selectedColor = value;
+                Bindings.GetInstance().SelectedColor = new SolidColorBrush(selectedColor);
+            }
+        }
 
         public ColorPicker()
         {
@@ -21,7 +37,7 @@ namespace ColorSelector
 
             ni = new WinForms.NotifyIcon
             {
-                Icon = new Icon(Application.GetResourceStream(new Uri("/Resources/main_QUO_icon.ico", UriKind.Relative)).Stream),
+                Icon = new System.Drawing.Icon(Application.GetResourceStream(new Uri("/Resources/main_QUO_icon.ico", UriKind.Relative)).Stream),
                 Visible = true
             };
             ni.DoubleClick += delegate (object sender, EventArgs args)
@@ -45,7 +61,7 @@ namespace ColorSelector
         {
             if(e.Button == WinForms.MouseButtons.Right)
             {
-                ContextMenu cm = (ContextMenu)FindResource("NotifyIconContextMenu");
+                ContextMenu cm = (ContextMenu)ColorSelectorGrid.FindResource("NotifyIconContextMenu");
                 cm.IsOpen = true;
             }
         }
@@ -54,6 +70,21 @@ namespace ColorSelector
         {
             ScreenWindow colorPicker = new ScreenWindow();
             colorPicker.ShowDialog();
+        }
+
+        private void MouseEnter_ColorGrid(object sender, EventArgs e)
+        {
+           Bindings.GetInstance().SelectedColor = new SolidColorBrush((Color)ColorConverter.ConvertFromString(((Path)sender).Tag.ToString()));
+        }
+
+        public void ResetSelectedColorDisplay(object sender, EventArgs e)
+        {
+            Bindings.GetInstance().SelectedColor = new SolidColorBrush(selectedColor);
+        }
+
+        private void MouseClick_ColorGrid(object sender, EventArgs e)
+        {
+            SelectedColor = (Color) ColorConverter.ConvertFromString(((Path) sender).Tag.ToString());
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)

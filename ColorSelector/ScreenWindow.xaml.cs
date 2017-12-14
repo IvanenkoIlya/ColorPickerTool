@@ -1,12 +1,10 @@
 ﻿using ColorSelector.Util;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
+//using System.Drawing;
 using System.Linq;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using Imaging = System.Drawing.Imaging;
@@ -33,7 +31,7 @@ namespace ColorSelector
         {
             var mousePos = Windows.Forms.Cursor.Position;
             
-            Magnifier.Fill = new SolidColorBrush(GetPixelColor(mousePos.X, mousePos.Y).ConvertToMediaColor());
+            Magnifier.Fill = new SolidColorBrush(GetPixelColor(mousePos.X, mousePos.Y));
         }
 
         private void Magnifier_MouseOver(object sender, MouseEventArgs e)
@@ -48,21 +46,19 @@ namespace ColorSelector
         {
             var clickPoint = Windows.Forms.Cursor.Position;
 
-            BindingExpression bindingExpression = ((ColorPicker)Application.Current.MainWindow).SelectedColorDisplay.GetBindingExpression(Windows.Shapes.Shape.FillProperty);
-            //Binding binding = bindingExpression.ParentBinding;
+            var pixelColor = GetPixelColor(clickPoint.X, clickPoint.Y);
 
-            PropertyInfo property = bindingExpression.DataItem.GetType().GetProperty(bindingExpression.ParentBinding.Path.Path);
-            property.SetValue(bindingExpression.DataItem, new SolidColorBrush(GetPixelColor(clickPoint.X, clickPoint.Y).ConvertToMediaColor()));
+            ((ColorPicker) Application.Current.MainWindow).SelectedColor = pixelColor;
 
             Close();
         }
 
-        private System.Drawing.Color GetPixelColor(int x, int y)
+        private Color GetPixelColor(int x, int y)
         {
-            Bitmap bmp = new Bitmap(3, 3, Imaging.PixelFormat.Format32bppArgb);
-            Graphics gfx = Graphics.FromImage(bmp);
+            System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(3, 3, Imaging.PixelFormat.Format32bppArgb);
+            System.Drawing.Graphics gfx = System.Drawing.Graphics.FromImage(bmp);
 
-            gfx.CopyFromScreen(x - 1, y - 1, 0, 0, new System.Drawing.Size(3, 3), CopyPixelOperation.SourceCopy);
+            gfx.CopyFromScreen(x - 1, y - 1, 0, 0, new System.Drawing.Size(3, 3), System.Drawing.CopyPixelOperation.SourceCopy);
 
             if( AverageColor)
             {
@@ -73,7 +69,7 @@ namespace ColorSelector
             }
         }
 
-        private System.Drawing.Color GetAverageColor(Bitmap bmp)
+        private Color GetAverageColor(System.Drawing.Bitmap bmp)
         {
             int r = 0, g = 0, b = 0;
             int total = 0;
@@ -91,13 +87,13 @@ namespace ColorSelector
                 }
             }
 
-            return System.Drawing.Color.FromArgb(
+            return Color.FromRgb(
                 Convert.ToByte(r / total),
                 Convert.ToByte(g / total),
                 Convert.ToByte(b / total));
         }
 
-        private System.Drawing.Color GetDominantColor(Bitmap bmp)
+        private Color GetDominantColor(System.Drawing.Bitmap bmp)
         {
             var list = new Dictionary<int, int>();
             for (int x = 0; x < bmp.Width; x++)
@@ -127,7 +123,9 @@ namespace ColorSelector
                 }
             }
 
-            return System.Drawing.Color.FromArgb( list.Aggregate((l, r) => l.Value > r.Value ? l : r).Key);
+            System.Drawing.Color color = System.Drawing.Color.FromArgb(list.Aggregate((l, r) => l.Value > r.Value ? l : r).Key);
+
+            return color.ConvertToMediaColor();
         }
     }
 }

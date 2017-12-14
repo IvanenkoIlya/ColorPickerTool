@@ -9,17 +9,18 @@
         Title="ColorPicker" Height="522.82" Width="317.373"
         Closing="Window_Closing">
     <Window.Resources>
-        <util:Bindings x:Key="myDataSource" />
-        <ContextMenu x:Key="NotifyIconContextMenu" Placement="MousePoint">
-            <MenuItem Header="_Open" Click="ReopenApplication"/>
-            <MenuItem Header="_Pick color" Click="PickColor">
-                <MenuItem.Icon>
-                    <Rectangle Width="10" Height="10" Fill="{Binding SelectedColor}" />
-                </MenuItem.Icon>
-            </MenuItem>
-            <Separator />
-            <MenuItem Header="_Exit" Click="CloseApplication" />
-        </ContextMenu>
+        <ObjectDataProvider x:Key="myDataSource"
+                            ObjectType="{x:Type util:Bindings}"
+                            MethodName="GetInstance" />
+
+        <Style x:Key="HexagonTemplate" TargetType="Path">
+            <Setter Property="Width" Value="14" />
+            <Setter Property="Height" Value="15" />
+            <Setter Property="Data" Value="M 7,0 L 14,3.5 14,11.5 7,15 0,11.5 0,3.5 7,0 z" />
+            <Setter Property="Fill" Value="Transparent" />
+            <EventSetter Event="MouseEnter" Handler="MouseEnter_ColorGrid"/>
+            <EventSetter Event="MouseLeftButtonDown" Handler="MouseClick_ColorGrid"/>
+        </Style>
     </Window.Resources>
     <Window.DataContext>
         <Binding Source="{StaticResource myDataSource}" />
@@ -27,10 +28,34 @@
     <Window.CommandBindings>
         <CommandBinding Command="{x:Static local:Commands.ColorPickerCommand}" Executed="PickColor" />
     </Window.CommandBindings>
-    <Grid VerticalAlignment="Top">
+    <Grid VerticalAlignment="Top" Name="ColorSelectorGrid">
+        <Grid.Resources>
+            <ContextMenu x:Key="NotifyIconContextMenu" Placement="MousePoint">
+                <MenuItem Header="_Open" Click="ReopenApplication"/>
+                <MenuItem Header="_Pick color" Click="PickColor">
+                    <MenuItem.Icon>
+                        <Rectangle Name="ContextMenuSelectedColor" Width="10" Height="10" 
+                                   Fill="{Binding Path=SelectedColor}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="_Exit" Click="CloseApplication" />
+            </ContextMenu>
+        </Grid.Resources>
         <StackPanel HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" Margin="0,20,0,0">
-            <Image VerticalAlignment="Top" Width="186" Source="Resources/img_colormap.gif" Height="158"/>
-            <Rectangle Name="SelectedColorDisplay" Width="100" Height="30" Margin="0,10,0,0" StrokeThickness="2" Stroke="Black" Fill="{Binding Path=SelectedColor}"/>
+            <Canvas Width="200" Height="173.2">
+                <Image VerticalAlignment="Top" Width="200" Height="173.2" Source="Resources/img_colormap.gif" />
+                <Path Canvas.Left="43" Canvas.Top="0" Tag="#003366" Style="{StaticResource HexagonTemplate}" />
+                <Path Canvas.Left="57" Canvas.Top="0" Tag="#336699" Style="{StaticResource HexagonTemplate}" />
+                <Path Canvas.Left="71" Canvas.Top="0" Tag="#3366cc" Style="{StaticResource HexagonTemplate}" />
+                <Path Canvas.Left="85" Canvas.Top="0" Tag="#3366cc" Style="{StaticResource HexagonTemplate}" />
+                <Path Canvas.Left="99" Canvas.Top="0" Tag="#336699" Style="{StaticResource HexagonTemplate}" />
+                <Path Canvas.Left="112" Canvas.Top="0" Tag="#3366cc" Style="{StaticResource HexagonTemplate}" />
+                <Path Canvas.Left="126" Canvas.Top="0" Tag="#3366cc" Style="{StaticResource HexagonTemplate}" />
+                <Path Canvas.Left="36" Canvas.Top="12" Tag="#006666" Style="{StaticResource HexagonTemplate}" />
+            </Canvas>
+            <Rectangle Name="SelectedColorDisplay" Width="100" Height="30" Margin="0,10,0,0" 
+                       StrokeThickness="2" Stroke="Black" Fill="{Binding Path=SelectedColor}"/>
         </StackPanel>
     </Grid>
 </Window>
